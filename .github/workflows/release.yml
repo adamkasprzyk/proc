@@ -53,3 +53,4 @@ jobs:
             @semantic-release/exec
             semantic-release-json-changelog-generator
 #dummy change
+#dummy release 2
