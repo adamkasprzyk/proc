@@ -38,11 +38,11 @@ jobs:
       - name: Do some task
         run: echo "Building image or some other job"
 
-    - name: Semantic Release
-      uses: cycjimmy/semantic-release-action@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        extra_plugins: |
-          @semantic-release/exec
-          semantic-release-json-changelog-generator
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          extra_plugins: |
+            @semantic-release/exec
+            semantic-release-json-changelog-generator
