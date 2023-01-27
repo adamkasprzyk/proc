@@ -5,8 +5,6 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -28,3 +26,23 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: cat project_file.txt
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: npm clear install
+        run: npm ci
+      
+      - name: Do some task
+        run: echo "Building image or some other job"
+
+    - name: Semantic Release
+      uses: cycjimmy/semantic-release-action@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        extra_plugins: |
+          @semantic-release/exec
+          semantic-release-json-changelog-generator
